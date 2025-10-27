@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Japanese Tech Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    --background: 196 100% 12%;
+    --foreground: 41 77% 89%;
+
+    --card: 196 95% 15%;
+    --card-foreground: 41 77% 89%;
+
+    --popover: 196 95% 15%;
+    --popover-foreground: 41 77% 89%;
+
+    --primary: 356 83% 41%;
+    --primary-foreground: 41 77% 89%;
+    --primary-glow: 356 100% 60%;
+
+    --secondary: 41 77% 89%;
+    --secondary-foreground: 196 100% 12%;
+
+    --muted: 196 80% 18%;
+    --muted-foreground: 41 50% 75%;
+
+    --accent: 356 83% 41%;
+    --accent-foreground: 41 77% 89%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 41 77% 89%;
+
+    --border: 196 60% 20%;
+    --input: 196 60% 20%;
+    --ring: 356 83% 41%;
+
+    --radius: 0.5rem;
+
+    /* Japanese Tech Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(356, 83%, 41%), hsl(356, 90%, 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(41, 77%, 89%), hsl(41, 70%, 95%));
+    --gradient-hero: linear-gradient(135deg, hsl(196, 100%, 12%) 0%, hsl(356, 83%, 41%) 50%, hsl(41, 77%, 89%) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(356, 83%, 41%) 0%, hsl(356, 100%, 60%) 50%, hsl(356, 83%, 41%) 100%);
+    --gradient-dark-glass: linear-gradient(135deg, rgba(0, 43, 59, 0.8), rgba(0, 43, 59, 0.4));
+    
+    /* Neon & Glow Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(356 83% 41% / 0.3);
+    --shadow-glow: 0 0 40px hsl(356 100% 60% / 0.4);
+    --shadow-card: 0 4px 16px hsl(0 0% 0% / 0.2);
+    --shadow-neon: 0 0 20px hsl(356 100% 60% / 0.6), 0 0 40px hsl(356 100% 60% / 0.3);
+    --shadow-neon-strong: 0 0 30px hsl(356 100% 60% / 0.8), 0 0 60px hsl(356 100% 60% / 0.4);
+  }
+
+  .dark {
+    --background: 196 100% 12%;
+    --foreground: 41 77% 89%;
+
+    --card: 196 95% 15%;
+    --card-foreground: 41 77% 89%;
+
+    --popover: 196 95% 15%;
+    --popover-foreground: 41 77% 89%;
+
+    --primary: 356 83% 41%;
+    --primary-foreground: 41 77% 89%;
+    --primary-glow: 356 100% 60%;
+
+    --secondary: 41 77% 89%;
+    --secondary-foreground: 196 100% 12%;
+
+    --muted: 196 80% 18%;
+    --muted-foreground: 41 50% 75%;
+
+    --accent: 356 83% 41%;
+    --accent-foreground: 41 77% 89%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 41 77% 89%;
+
+    --border: 196 60% 20%;
+    --input: 196 60% 20%;
+    --ring: 356 83% 41%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(356, 83%, 41%), hsl(356, 90%, 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(41, 77%, 89%), hsl(41, 70%, 95%));
+    --gradient-hero: linear-gradient(135deg, hsl(196, 100%, 12%) 0%, hsl(356, 83%, 41%) 50%, hsl(41, 77%, 89%) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(356, 83%, 41%) 0%, hsl(356, 100%, 60%) 50%, hsl(356, 83%, 41%) 100%);
+    --gradient-dark-glass: linear-gradient(135deg, rgba(0, 43, 59, 0.8), rgba(0, 43, 59, 0.4));
+    
+    /* Dark shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(356 83% 41% / 0.4);
+    --shadow-glow: 0 0 50px hsl(356 100% 60% / 0.5);
+    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-neon: 0 0 25px hsl(356 100% 60% / 0.7), 0 0 50px hsl(356 100% 60% / 0.4);
+    --shadow-neon-strong: 0 0 35px hsl(356 100% 60% / 0.9), 0 0 70px hsl(356 100% 60% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-rajdhani;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        hsl(356 83% 41% / 0.03) 2px,
+        hsl(356 83% 41% / 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        hsl(356 83% 41% / 0.03) 2px,
+        hsl(356 83% 41% / 0.03) 4px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron;
+  }
+}
+
+@layer utilities {
+  .neon-border {
+    border: 1px solid hsl(356 83% 41% / 0.5);
+    box-shadow: 0 0 10px hsl(356 100% 60% / 0.3), inset 0 0 10px hsl(356 100% 60% / 0.1);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsl(356 100% 60% / 0.8), 0 0 20px hsl(356 100% 60% / 0.6);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(0, 43, 59, 0.7), rgba(0, 43, 59, 0.3));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(193, 18, 31, 0.2);
+  }
+
+  .circuit-pattern {
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsl(356 83% 41% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, hsl(356 83% 41% / 0.05) 0%, transparent 50%);
+  }
+}
