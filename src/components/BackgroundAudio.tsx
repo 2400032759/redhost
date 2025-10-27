@@ -65,7 +65,15 @@ const BackgroundAudio: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
 
   return (
     <AudioContext.Provider value={{ muted, toggle }}>
-      <audio ref={audioRef} src={AUDIO_SRC} preload="auto" playsInline />
+      <audio
+        ref={audioRef}
+        src={AUDIO_SRC}
+        preload="auto"
+        playsInline
+        loop
+        autoPlay
+        muted={muted}
+      />
       {children}
     </AudioContext.Provider>
   );
