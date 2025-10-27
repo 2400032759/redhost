@@ -10,6 +10,7 @@ import Portfolio from "./pages/Portfolio";
 import Quotation from "./pages/Quotation";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import BackgroundAudio from "@/components/BackgroundAudio";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BackgroundAudio>
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
@@ -29,7 +31,8 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
+      </BackgroundAudio>
     </TooltipProvider>
   </QueryClientProvider>
 );
