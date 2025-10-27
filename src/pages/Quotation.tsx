@@ -75,7 +75,7 @@ const Quotation = () => {
                       <FormLabel className="font-rajdhani text-lg">Full Name *</FormLabel>
                       <FormControl>
                         <Input 
-                          placeholder="John Doe" 
+                          placeholder="Vishwas Gupta" 
                           {...field} 
                           className="neon-border bg-background/50 font-rajdhani"
                         />
@@ -95,7 +95,7 @@ const Quotation = () => {
                         <FormControl>
                           <Input 
                             type="email" 
-                            placeholder="john@example.com" 
+                            placeholder="vishwas@redhost.tech" 
                             {...field} 
                             className="neon-border bg-background/50 font-rajdhani"
                           />

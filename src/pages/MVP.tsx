@@ -122,7 +122,7 @@ const MVP = () => {
               Why Choose our <span className="neon-text">MVP Builder ?</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-rajdhani">
-              Perfect for entrepreneurs, startups, and innovators who want to validate their ideas quickly
+              Perfect for entrepreneurs, startups and innovators who want to validate their ideas quickly
             </p>
           </div>
           
@@ -247,7 +247,7 @@ const MVP = () => {
             </h2>
             <p className="text-xl text-primary-foreground/90 font-rajdhani">
               Don't let your brilliant idea stay just an idea. Let's build your MVP today!
-            </p>
+            </p> <br/>
             <Link to="/quotation">
               <Button 
                 variant="neon" 

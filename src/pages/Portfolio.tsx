@@ -9,18 +9,18 @@ const Portfolio = () => {
   const features = [
     {
       icon: Palette,
-      title: "Japanese Tech Design",
-      description: "Stunning portfolio with modern Japanese-inspired aesthetic"
+      title: "Futuristic Japanese Design",
+      description: "Crafted with a sleek, modern aesthetic inspired by Japan’s design philosophy - minimalist, powerful and elegant."
     },
     {
       icon: Code2,
-      title: "Professional Code",
-      description: "Clean, optimized, and industry-standard development"
+      title: "Industry-Grade Code",
+      description: "Your portfolio deserves code that’s clean, optimized and built using best development practices - because first impressions now come in milliseconds."
     },
     {
       icon: Sparkles,
-      title: "Stand Out",
-      description: "Make a lasting impression on recruiters and clients"
+      title: "Make an Impression That Lasts",
+      description: "Whether it’s a recruiter, client or investor - stand out as a brand, not just another resume."
     }
   ];
 
