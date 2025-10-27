@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 
-// NOTE: referencing the asset by path (string) avoids a build-time import error
-// if the file isn't present yet. Copy the MP3 into src/assets with the filename below.
-const AUDIO_SRC = "/src/assets/japanese-nostalgia-flute-and-stringed-instruments-166930.mp3";
+// The MP3 is served from the public folder so it can be requested at runtime.
+// Place the file in public/audio/ (e.g. public/audio/japanese-nostalgia-flute-and-stringed-instruments-166930.mp3)
+const AUDIO_SRC = "/audio/japanese-nostalgia-flute-and-stringed-instruments-166930.mp3";
 
 type AudioContextValue = {
   muted: boolean;
