@@ -184,7 +184,9 @@ const Contact = () => {
             {/* Team Member 1 */}
             <div className="bg-card p-8 rounded-lg shadow-elegant hover:shadow-glow transition-all duration-300 text-center animate-fade-in-up">
               <div className="w-32 h-32 bg-gradient-primary rounded-full mx-auto mb-6 flex items-center justify-center">
-                <span className="text-4xl font-bold text-primary-foreground">KV</span>
+                <div className="w-32 h-32 rounded-full mx-auto flex items-center justify-center overflow-hidden bg-gradient-primary">
+                  <img src="https://image2url.com/images/1761627464421-354c2d68-7d79-4ed1-8316-29814b68a60e.jpg" alt="Kakkireni Vishwas" className="object-cover w-32 h-32" />
+                </div>
               </div>
               <h3 className="text-2xl font-bold mb-2 text-accent">Kakkireni Vishwas</h3>
               <p className="text-muted-foreground mb-4">Founder & CEO</p>
@@ -207,7 +209,7 @@ const Contact = () => {
               <h3 className="text-2xl font-bold mb-2 text-accent">Alluri Sai Surya Manoj</h3>
               <p className="text-muted-foreground mb-4">Co-Founder & COO</p>
               <a 
-                href="https://www.linkedin.com/in/alluri-sai-surya-manoj" 
+                href="https://www.linkedin.com/in/sai-surya-manoj-alluri-367912357" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
