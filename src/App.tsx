@@ -9,7 +9,9 @@ import MVP from "./pages/MVP";
 import Portfolio from "./pages/Portfolio";
 import Quotation from "./pages/Quotation";
 import Contact from "./pages/Contact";
+import OurProjects from "./pages/OurProjects";
 import NotFound from "./pages/NotFound";
+import { Navigate } from "react-router-dom";
 import BackgroundAudio from "@/components/BackgroundAudio";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,9 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/mvp" element={<MVP />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/projects" element={<OurProjects />} />
+          {/* legacy route: redirect to /projects */}
+          <Route path="/our-projects" element={<Navigate to="/projects" replace />} />
           <Route path="/quotation" element={<Quotation />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -7,17 +7,19 @@ const Services = () => {
     {
       title: "Standard",
       price: "₹5,999",
-      description: "Perfect for small businesses and startups",
+      description: "Perfect for small businesses",
       features: [
         "Basic landing page design",
         "Up to 8 pages",
-        "Free web hosting for 1 year",
+        "Free Web hosting(1 Year)",
         "2 revisions included",
-        "7-day delivery guarantee",
-        "Mobile responsive design",
-        "SEO optimized",
-        "Contact form integration",
-        "Social media links"
+        "7-day delivery",
+        "Mobile responsive",
+        { label: "Basic UI/UX", included: true },
+        { label: "SEO-optimised", included: false },
+        { label: "Priority support", included: false },
+        { label: "Free domain", included: false },
+        { label: "Custom API Integration", included: false },
       ]
     },
     {
@@ -27,15 +29,15 @@ const Services = () => {
       features: [
         "Premium landing page design",
         "Up to 15 pages",
-        "Free hosting & domain for 1 year",
+        "Free Web hosting(1 Year)",
         "3 revisions included",
-        "7-day delivery guarantee",
-        "Mobile responsive design",
-        "Advanced SEO optimization",
-        "Multiple contact forms",
-        "Google Analytics integration",
-        "Newsletter integration",
-        "Blog section setup"
+        "7-day delivery",
+        "Mobile responsive",
+        "Basic SEO",
+        "Advanced UI/UX",
+        { label: "Support Assist", included: true },
+        { label: "Free domain", included: false },
+        { label: "Custom API Integration", included: false },
       ],
       isPopular: true
     },
@@ -45,18 +47,16 @@ const Services = () => {
       description: "Complete solution for enterprises",
       features: [
         "Premium animated landing page",
-        "Up to 15 pages with animations",
-        "Top-notch UI/UX design",
-        "Free hosting & VPS for 1 month",
-        "Free domain for 1 year",
-        "2 revisions included",
-        "7-day delivery guarantee",
-        "Priority support (24/7)",
-        "Advanced animations & interactions",
-        "E-commerce ready",
-        "Custom API integration",
-        "Performance optimization",
-        "Security hardening"
+        "Up to 20 pages",
+        "Top-notch UI/UX",
+        "Free hosting & VPS (1 month)",
+        "Free domain",
+        "3 revisions included",
+        "7-day delivery",
+        "Basic SEO",
+        "Priority support",
+        "Advanced animations",
+        { label: "Custom API Integration", included: true },
       ]
     }
   ];

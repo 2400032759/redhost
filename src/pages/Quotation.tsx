@@ -83,7 +83,7 @@ const Quotation = () => {
 
   return (
     <div className="min-h-screen relative">
-      <Navigation />
+  <Navigation scrollToTopOnGetStarted />
 
       {/* ✅ Success Animation */}
       <AnimatePresence>

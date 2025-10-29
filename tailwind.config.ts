@@ -114,6 +114,11 @@ export default {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100vh)" }
         }
+        ,
+        "marquee": {
+          from: { transform: 'translateX(0)' },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +131,11 @@ export default {
         "slide-in": "slide-in 0.5s ease-out",
         "float": "float 3s ease-in-out infinite",
         "scan-line": "scan-line 8s linear infinite"
+        ,
+        "marquee": "marquee var(--duration) linear infinite"
+      },
+      maxWidth: {
+        container: "1280px",
       },
       backgroundImage: {
         "gradient-primary": "var(--gradient-primary)",

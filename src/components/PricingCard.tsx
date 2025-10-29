@@ -1,13 +1,14 @@
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
+type FeatureType = string | { label: string; included: boolean };
 interface PricingCardProps {
   title: string;
   price: string;
   description: string;
-  features: string[];
+  features: FeatureType[];
   isPopular?: boolean;
 }
 
@@ -32,17 +33,41 @@ const PricingCard = ({ title, price, description, features, isPopular }: Pricing
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        {features.map((feature, index) => (
-          <div key={index} className="flex items-start gap-3">
-            <div className="p-1 bg-primary/10 rounded-full">
-              <Check className="h-4 w-4 text-primary" />
-            </div>
-            <span className="text-sm text-card-foreground">{feature}</span>
-          </div>
-        ))}
+        {features.map((feature, index) => {
+          if (typeof feature === "string") {
+            return (
+              <div key={index} className="flex items-start gap-3">
+                <div className="p-1 bg-primary/10 rounded-full">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm text-card-foreground">{feature}</span>
+              </div>
+            );
+          } else if (
+            typeof feature === "object" &&
+            feature !== null &&
+            "included" in feature &&
+            "label" in feature
+          ) {
+            return (
+              <div key={index} className="flex items-start gap-3">
+                <div className={`p-1 rounded-full ${feature.included ? "bg-primary/10" : "bg-destructive/10"}`}>
+                  {feature.included ? (
+                    <Check className="h-4 w-4 text-primary" />
+                  ) : (
+                    <X className="h-4 w-4 text-destructive" />
+                  )}
+                </div>
+                <span className={`text-sm ${feature.included ? "text-card-foreground" : "text-destructive/80"}`}>{feature.label}</span>
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
       </CardContent>
       <CardFooter className="pt-4">
-        <Link to="/quotation" className="w-full">
+        <Link to="/quotation" className="w-full" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <Button 
             variant={isPopular ? "hero" : "default"} 
             size="lg" 
