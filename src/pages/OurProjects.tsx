@@ -1,160 +1,231 @@
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ShuffleCards } from "@/components/ui/testimonial-demo";
-import { useEffect } from "react";
+import { Testimonials } from "@/components/Testimonials";
 
-// local SVG thumbnails (placeholders) - prefer these at runtime
+// Import local assets for fallbacks
 import bigclassesThumb from "@/assets/projects/bigclasses.svg";
 import vishwasThumb from "@/assets/projects/vishwas.svg";
 import gunaThumb from "@/assets/projects/gunaayurvizag.svg";
 import brundavanamThumb from "@/assets/projects/brundavanamgoshala.svg";
 import driveEasyThumb from "@/assets/projects/drive-easy.svg";
 import aksharaThumb from "@/assets/projects/akshara.svg";
-import sriaThumb from "@/assets/projects/sriaurobindo.svg";
-import svchomesThumb from "@/assets/projects/svchomes.svg";
 import sparkedxThumb from "@/assets/projects/sparkedx.svg";
 import xpertThumb from "@/assets/projects/xpertstaffing.svg";
 import sparkphonicsThumb from "@/assets/projects/sparkphonics.svg";
 
 const projects = [
-  { name: "Big Classes", url: "https://bigclasses.ai/", thumb: bigclassesThumb, slug: "bigclasses" },
-  { name: "Vishwas.io", url: "https://vishwas.io", thumb: vishwasThumb, slug: "vishwas" },
-  { name: "Guna Ayurveda", url: "https://gunaayurvizag.in/", thumb: gunaThumb, slug: "gunaayurvizag" },
-  { name: "Brundavanam Goshala", url: "https://brundavanamgoshala.com/", thumb: brundavanamThumb, slug: "brundavanamgoshala" },
-  { name: "Drive Easy Car Rentals", url: "https://drive-easy-taupe.vercel.app/", thumb: driveEasyThumb, slug: "drive-easy" },
-  { name: "Akshara Schools", url: "https://www.akshara.in/", thumb: aksharaThumb, slug: "akshara" },
-  { name: "Sri Aurobindo Integral School", url: "https://www.sriaurobindointegralschool.com/", thumb: sriaThumb, slug: "sriaurobindo" },
-  { name: "SVC Homes", url: "https://www.svchomes.in/", thumb: svchomesThumb, slug: "svchomes" },
-  { name: "Spark EdX", url: "https://www.sparkedx.com/", thumb: sparkedxThumb, slug: "sparkedx" },
-  { name: "Xpert Staffing", url: "https://xpertstaffing.in/", thumb: xpertThumb, slug: "xpertstaffing" },
-  { name: "Spark Phonics", url: "https://sparkphonics.com/", thumb: sparkphonicsThumb, slug: "sparkphonics" },
+  {
+    name: "Vishwas.io",
+    url: "https://vishwas.io",
+    category: "Ed-Tech Company • Payment Integration",
+    image: "/Proj-assests/vishwas.png",
+    fallback: vishwasThumb,
+  },
+  {
+    name: "Big Classes",
+    url: "https://bigclasses.ai/",
+    category: "EdTech Platform • AI Integration",
+    image: "/Proj-assests/bigclasses.png",
+    fallback: bigclassesThumb,
+  },
+  {
+    name: "CS Coworking",
+    url: "https://stately-meerkat-8c4b94.netlify.app/",
+    category: "Co-Working Spaces • Booking System",
+    image: "https://image2url.com/images/1765207767954-559504ef-addf-4c61-8091-09484116c424.png",
+    fallback: null,
+  },
+  {
+    name: "Guna Ayurveda",
+    url: "https://gunaayurvizag.in/",
+    category: "Healthcare • E-commerce",
+    image: "/Proj-assests/gunaayurvizag.png",
+    fallback: gunaThumb,
+  },
+  {
+    name: "Spark EdX",
+    url: "https://www.sparkedx.com/",
+    category: "EdTech • Learning Management",
+    image: "https://image2url.com/images/1765208102497-2c7b5322-b7c0-478d-b00a-622dc1516f6d.png",
+    fallback: sparkedxThumb,
+  },
+  {
+    name: "Drive Easy",
+    url: "https://drive-easy-taupe.vercel.app/",
+    category: "Car Rentals • Booking App",
+    image: "/Proj-assests/drive-easy.png",
+    fallback: driveEasyThumb,
+  },
+  {
+    name: "Brundavanam Goshala",
+    url: "https://brundavanamgoshala.com/",
+    category: "Non-Profit • Community Platform",
+    image: "/Proj-assests/brundavanamgoshala.png",
+    fallback: brundavanamThumb,
+  },
+  {
+    name: "Akshara Schools",
+    url: "https://www.akshara.in/",
+    category: "Education • Institutional Website",
+    image: "/Proj-assests/akshara.png",
+    fallback: aksharaThumb,
+  },
+  {
+    name: "Xpert Staffing",
+    url: "https://xpertstaffing.in/",
+    category: "HR Solutions • Staffing Portal",
+    image: "/Proj-assests/xpertstaffing.png",
+    fallback: xpertThumb,
+  },
+  {
+    name: "Spark Phonics",
+    url: "https://sparkphonics.com/",
+    category: "Education • Interactive Learning",
+    image: "/Proj-assests/sparkphonics.png",
+    fallback: sparkphonicsThumb,
+  },
 ];
 
 const OurProjects = () => {
   useEffect(() => {
-    // ensure page scrolls to top when this route is opened
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-background font-sans selection:bg-[#FF2A45]/30">
       <Navigation />
-      <section className="relative overflow-hidden py-24">
+
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-4 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.02]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/10 blur-[120px] rounded-full overflow-visible pointer-events-none" />
+
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="inline-block mb-3 px-4 py-1 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm animate-fade-in">
+            <span className="text-primary font-orbitron tracking-widest text-xs uppercase">Portfolio Showcase</span>
+          </div>
+
+          <h1 className="text-4xl md:text-6xl font-bold font-orbitron mb-2 animate-fade-in-up">
+            <span className="text-white">Digital</span> <span className="text-primary">Excellence</span>
+          </h1>
+
+          <p className="max-w-2xl mx-auto text-lg text-muted-foreground font-sans leading-relaxed animate-fade-in-up delay-100 mb-2">
+            We don't just build websites; we engineer digital experiences that drive growth.
+            Explore our curated selection of premium projects delivered for industry leaders.
+          </p>
+        </div>
+      </section>
+
+      {/* Projects Grid */}
+      <section className="py-4 relative">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl font-bold font-orbitron">
-              Our <span className="neon-text">Projects</span>
-            </h1>
-            <p className="text-lg text-muted-foreground font-rajdhani max-w-2xl mx-auto">
-              Here are some of the websites We’ve built recently. We have 2+ years of experience in full-stack & WordPress
-              development, handling over 20+ projects. We create modern, responsive websites that help businesses grow.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, idx) => (
+              <a
+                key={idx}
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative overflow-hidden rounded-xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-500 shadow-lg hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] block animate-fade-in-up"
+                style={{ animationDelay: `${idx * 100}ms` }}
+              >
+                <div className="aspect-video overflow-hidden relative bg-muted/20">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                    onError={(e) => {
+                      const t = e.currentTarget;
+                      if (project.fallback && t.src !== project.fallback) {
+                        t.src = project.fallback;
+                      } else {
+                        // Final fallback to screenshot service if local assets fail
+                        t.src = `https://image.thum.io/get/width/800/crop/600/${encodeURIComponent(project.url)}`;
+                      }
+                    }}
+                  />
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                    <span className="text-white font-orbitron tracking-widest uppercase text-sm border border-white/30 px-6 py-2 rounded-full backdrop-blur-md transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-white/10">
+                      Visit Website
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 border-t border-border/50 bg-card/30 backdrop-blur-sm">
+                  <div className="flex justify-between items-start gap-4">
+                    <div>
+                      <h3 className="text-xl font-bold font-orbitron mb-2 group-hover:text-primary transition-colors">{project.name}</h3>
+                      <p className="text-sm text-muted-foreground font-sans uppercase tracking-wide">{project.category}</p>
+                    </div>
+                    <div className="p-2 rounded-full bg-primary/10 text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-2 group-hover:translate-x-0">
+                      <ExternalLink className="h-5 w-5" />
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
+
+            {/* Many More Coming Soon Card */}
+            <div className="group relative overflow-hidden rounded-xl bg-card/20 border-2 border-dashed border-border/50 hover:border-primary/50 transition-all duration-500 flex flex-col items-center justify-center min-h-[320px] animate-fade-in-up" style={{ animationDelay: `${projects.length * 100}ms` }}>
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative z-10 text-center p-6">
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-4xl font-orbitron text-primary">+</span>
+                </div>
+                <h3 className="text-2xl font-bold font-orbitron text-foreground mb-2">Many More</h3>
+                <p className="text-lg text-muted-foreground font-sans tracking-wide">Coming Soon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto glass-card rounded-2xl p-8 text-center border border-primary/20 shadow-[0_0_50px_rgba(220,38,38,0.1)]">
+            <h2 className="text-3xl md:text-5xl font-bold font-orbitron mb-4">
+              Ready to Build Your <span className="text-primary">Legacy?</span>
+            </h2>
+            <p className="text-xl text-muted-foreground font-sans mb-6 max-w-2xl mx-auto">
+              Join the ranks of successful brands that trust RedHost. Let's create something extraordinary together.
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a href="/quotation">
+                <Button size="lg" className="text-lg px-8 py-6 rounded-full shadow-neon hover:shadow-neon-strong transition-all duration-300 bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white font-bold font-orbitron border-none">
+                  Start Your Project
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
+              <a href="/contact">
+                <Button variant="outline" size="lg" className="text-lg px-8 py-6 rounded-full border-primary/50 text-foreground hover:bg-primary/10 font-orbitron">
+                  Contact Us
+                </Button>
+              </a>
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Grid with thumbnails + fallback to favicon if screenshot service fails */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(() => {
-              // build a render list and insert a '+More' tile after Spark Phonics
-              const items: Array<any> = [];
-              projects.forEach((p) => {
-                items.push(p);
-                if (p.slug === "sparkphonics") {
-                  items.push({ more: true });
-                }
-              });
-
-              return items.map((item, idx) => {
-                if (item.more) {
-                  return (
-                    <div
-                      key={`more-${idx}`}
-                      className="glass-card p-6 rounded-lg hover:shadow-neon transition-all duration-200 flex items-center justify-center text-center"
-                    >
-                      <a href="/projects" className="flex flex-col items-center gap-3">
-                        <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-2xl font-orbitron text-primary">+More</div>
-                        <div className="text-muted-foreground font-rajdhani">See more projects</div>
-                      </a>
-                    </div>
-                  );
-                }
-
-                const p = item;
-                // runtime fallback (if needed)
-                const screenshot = `https://image.thum.io/get/width/800/crop/600/${encodeURIComponent(p.url)}`;
-                const favicon = `https://s2.googleusercontent.com/s2/favicons?domain_url=${encodeURIComponent(p.url)}`;
-                // try to use a user-provided screenshot in public/projects/{slug}.png first
-                const slug = p.slug || p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-                const publicScreenshot = `/projects/${slug}.png`;
-
-                return (
-                  <a
-                    key={idx}
-                    href={p.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="glass-card p-4 rounded-lg hover:shadow-neon transition-all duration-200 flex flex-col"
-                  >
-                    <div
-                      className="w-full bg-muted/10 rounded-md overflow-hidden flex items-center justify-center relative"
-                      style={{ aspectRatio: "16/9" }}
-                    >
-                      <img
-                        src={publicScreenshot}
-                        alt={`${p.name} screenshot`}
-                        loading="lazy"
-                        className="object-contain w-full h-full absolute inset-0"
-                        onError={(e) => {
-                          const target = e.currentTarget as HTMLImageElement;
-                          const src = target.src || "";
-                          if (src.endsWith(`/projects/${slug}.png`)) {
-                            target.src = p.thumb || screenshot;
-                          } else if (src.endsWith(p.thumb || "")) {
-                            target.src = screenshot;
-                          } else if (!src.includes(favicon)) {
-                            target.src = favicon;
-                          }
-                        }}
-                      />
-                    </div>
-
-                    <div className="mt-3 flex items-center justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold font-orbitron">{p.name}</h3>
-                        <p className="text-sm text-muted-foreground font-rajdhani">Live website — click to visit</p>
-                      </div>
-                      <ExternalLink className="h-5 w-5 text-primary-foreground" />
-                    </div>
-                  </a>
-                );
-              });
-            })()}
-          </div>
-
-          <div className="mt-12 max-w-3xl mx-auto text-center">
-            <p className="text-muted-foreground font-rajdhani">
-              Want a website like these? We build fast, SEO-friendly, responsive sites with clean UI/UX. Get in touch and
-              we'll help you get started.
-            </p>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-10 flex justify-center gap-4">
-            <a href="/quotation">
-              <Button variant="hero" size="lg" className="group">
-                Get a Free Quote
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </a>
-            <a href="/contact">
-              <Button variant="neon" size="lg">Contact Us</Button>
-            </a>
-          </div>
-
-          {/* Testimonials - moved from Home: show below CTAs */}
-          <div className="mt-12">
-            <ShuffleCards />
-          </div>
+      {/* Testimonials */}
+      <section className="py-4 bg-background relative">
+        <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+        <div className="container mx-auto px-4 mb-3 text-center relative z-10">
+          <h2 className="text-3xl md:text-5xl font-bold font-orbitron mb-3">
+            Voices of <span className="text-primary">Success</span>
+          </h2>
+          <p className="text-muted-foreground text-xl font-sans max-w-2xl mx-auto">
+            Trusted by founders who demand excellence.
+          </p>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <Testimonials />
         </div>
       </section>
 

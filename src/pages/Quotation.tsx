@@ -24,10 +24,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, ShieldCheck, Clock, Zap, MessageSquare, PhoneCall } from "lucide-react";
+import { Testimonials } from "@/components/Testimonials";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  company: z.string().min(2, { message: "Company name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().min(10, { message: "Phone number must be at least 10 digits" }),
   plan: z.string().min(1, { message: "Please select a plan" }),
@@ -44,6 +46,7 @@ const Quotation = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      company: "",
       email: "",
       phone: "",
       plan: "",
@@ -51,10 +54,6 @@ const Quotation = () => {
       message: "",
     },
   });
-
-  const handleScrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
@@ -66,9 +65,8 @@ const Quotation = () => {
       });
 
       if (response.ok) {
-        toast.success("Quote request submitted successfully!");
+        toast.success("Strategy call request submitted successfully!");
         form.reset();
-
         setShowSuccess(true);
         setTimeout(() => setShowSuccess(false), 4000);
       } else {
@@ -82,235 +80,245 @@ const Quotation = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
-  <Navigation scrollToTopOnGetStarted />
+    <div className="min-h-screen bg-background font-sans selection:bg-[#FF2A45]/30 relative">
+      <Navigation />
 
-      {/* ✅ Success Animation */}
+      {/* Success Modal */}
       <AnimatePresence>
         {showSuccess && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-md z-50"
+            className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-md z-[100]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="glass-card neon-border text-center rounded-2xl p-8 shadow-neon max-w-sm"
+              className="glass-card neon-border text-center rounded-2xl p-8 shadow-neon max-w-sm mx-4"
               initial={{ scale: 0.7, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
               transition={{ duration: 0.4, type: 'spring' }}
             >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-              >
-                <CheckCircle2 className="mx-auto text-primary w-16 h-16 mb-4 animate-pulse" />
-              </motion.div>
-              <h2 className="text-2xl font-orbitron mb-2 neon-text">Thank you!</h2>
-              <p className="text-muted-foreground font-rajdhani">
-                Quote submitted successfully.<br />Our team will contact you within 24 hours.
+              <CheckCircle2 className="mx-auto text-primary w-20 h-20 mb-6 animate-pulse" />
+              <h2 className="text-3xl font-orbitron mb-2 text-white">Received!</h2>
+              <p className="text-muted-foreground font-sans text-lg">
+                We'll analyze your requirements and reach out to schedule your call within 24 hours.
               </p>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ✅ Hero Section */}
-      <section className="py-8 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute top-0 right-0 w-1/4 h-1/4 circuit-pattern opacity-10 scale-[0.7]" style={{ backgroundSize: '400px 400px' }} />
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
-            <div className="inline-block p-4 glass-card rounded-full mb-4 animate-float">
-              <Send className="h-12 w-12 text-primary" />
+      {/* Main Content Split Layout */}
+      <div className="pt-20 md:pt-24 pb-12 md:pb-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.02]" />
+        <div className="absolute top-0 right-0 w-full md:w-1/2 h-1/2 bg-primary/5 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start animate-fade-in">
+
+            {/* Left Column: Context & Value */}
+            <div className="space-y-6 lg:sticky lg:top-24">
+              <div className="inline-block px-4 py-1 rounded-full border border-primary/30 bg-primary/10">
+                <span className="text-primary font-orbitron tracking-widest text-[10px] md:text-xs uppercase">Free Strategy</span>
+              </div>
+              <h1 className="text-4xl md:text-7xl font-bold font-orbitron leading-tight">
+                Book Your <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4D4D] to-[#B30000]">Free Strategy Call.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground font-sans leading-relaxed max-w-lg">
+                Ready to transform your digital presence? Fill out the form, and our team will prepare a tailored growth plan for you.
+              </p>
+
+              {/* Features: Compact on mobile */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 md:gap-4 pt-2 md:pt-4">
+                <div className="flex flex-col md:flex-row gap-3 items-center md:items-start p-3 md:p-4 rounded-xl bg-card/30 border border-border/50 text-center md:text-left">
+                  <Clock className="w-6 h-6 md:w-8 md:h-8 text-primary shrink-0" />
+                  <div>
+                    <h3 className="font-bold font-orbitron text-sm md:text-base mb-0.5">30-Min Call</h3>
+                    <p className="hidden md:block text-sm text-muted-foreground font-sans">Actionable insights.</p>
+                  </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-3 items-center md:items-start p-3 md:p-4 rounded-xl bg-card/30 border border-border/50 text-center md:text-left">
+                  <ShieldCheck className="w-6 h-6 md:w-8 md:h-8 text-primary shrink-0" />
+                  <div>
+                    <h3 className="font-bold font-orbitron text-sm md:text-base mb-0.5">No Pressure</h3>
+                    <p className="hidden md:block text-sm text-muted-foreground font-sans">Just value.</p>
+                  </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-3 items-center md:items-start p-3 md:p-4 rounded-xl bg-card/30 border border-border/50 text-center md:text-left">
+                  <Zap className="w-6 h-6 md:w-8 md:h-8 text-primary shrink-0" />
+                  <div>
+                    <h3 className="font-bold font-orbitron text-sm md:text-base mb-0.5">Rapid Scale</h3>
+                    <p className="hidden md:block text-sm text-muted-foreground font-sans">Built for growth.</p>
+                  </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-3 items-center md:items-start p-3 md:p-4 rounded-xl bg-card/30 border border-border/50 text-center md:text-left">
+                  <MessageSquare className="w-6 h-6 md:w-8 md:h-8 text-primary shrink-0" />
+                  <div>
+                    <h3 className="font-bold font-orbitron text-sm md:text-base mb-0.5">Free Consult</h3>
+                    <p className="hidden md:block text-sm text-muted-foreground font-sans">Strategy included.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold font-orbitron mb-4">
-              Get Your Website Live - <span className="neon-text">Let’s Build Your Online Presence</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-rajdhani">
-              Tell us what you need below - our team will plan, design and quote your project within 24 hours.
-            </p>
-            <motion.div
-              className="flex justify-center mt-10"
-              initial={{ y: 0 }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <button
-                onClick={handleScrollToForm}
-                className="relative px-8 py-5 rounded-xl glass-card neon-border shadow-neon font-rajdhani text-lg text-primary-foreground bg-background/80 hover:brightness-110 transition-all duration-300 cursor-pointer"
-                style={{ outline: 'none', border: 'none' }}
-              >
-                <span className="block font-semibold text-lg">
-                  Get Instant Quote ↓
-                </span>
-              </button>
-            </motion.div>
+
+            {/* Right Column: The Form - Preserved Desktop, Optimized Mobile */}
+            <div className="glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl border border-primary/20 shadow-[0_0_50px_rgba(var(--primary-rgb),0.05)]">
+              <h2 className="text-xl md:text-2xl font-bold font-orbitron mb-6 flex items-center gap-3">
+                <PhoneCall className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                Book Strategy Call
+              </h2>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-sans">Full Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Doe" {...field} className="bg-background/50 border-input/50 focus:border-primary/50 h-10 md:h-12 text-base" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="company"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-sans">Company Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your Company" {...field} className="bg-background/50 border-input/50 focus:border-primary/50 h-10 md:h-12 text-base" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-sans">Email</FormLabel>
+                          <FormControl>
+                            <Input placeholder="john@company.com" {...field} className="bg-background/50 border-input/50 focus:border-primary/50 h-10 md:h-12 text-base" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-sans">Phone</FormLabel>
+                          <FormControl>
+                            <Input placeholder="+91 ..." {...field} className="bg-background/50 border-input/50 focus:border-primary/50 h-10 md:h-12 text-base" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <FormField
+                      control={form.control}
+                      name="plan"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-sans">Interested Service</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="bg-background/50 border-input/50 focus:border-primary/50 h-10 md:h-12 text-base">
+                                <SelectValue placeholder="Select Service" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="standard">Web Design (Standard)</SelectItem>
+                              <SelectItem value="gold">Web Design (Gold)</SelectItem>
+                              <SelectItem value="platinum">Web Design (Platinum)</SelectItem>
+                              <SelectItem value="mvp">MVP Development</SelectItem>
+                              <SelectItem value="app">Mobile App</SelectItem>
+                              <SelectItem value="growth">Growth Strategy</SelectItem>
+                              <SelectItem value="custom">Custom Requirement</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="projectType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-sans">Business Type</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="bg-background/50 border-input/50 focus:border-primary/50 h-10 md:h-12 text-base">
+                                <SelectValue placeholder="Select Type" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="business">Corporate / Business</SelectItem>
+                              <SelectItem value="ecommerce">E-Commerce</SelectItem>
+                              <SelectItem value="startup">Startup / SaaS</SelectItem>
+                              <SelectItem value="consulting">Consulting / Agency</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-sans">What should we discuss?</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Briefly describe your goals..."
+                            className="min-h-[120px] bg-background/50 border-input/50 focus:border-primary/50 resize-none text-base p-3 md:p-4"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" size="lg" className="w-full h-12 md:h-14 text-lg font-orbitron shadow-neon hover:shadow-neon-strong transition-all duration-300 rounded-xl bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white border-none" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <span className="animate-pulse">Scheduling...</span>
+                    ) : (
+                      <>
+                        Book Strategy Call <PhoneCall className="ml-2 h-5 w-5" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Form>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ✅ Form Section */}
-      <section ref={formRef} className="py-20 bg-muted/30 relative">
+      {/* Social Proof */}
+      <section className="py-12 bg-background/50 relative border-t border-border/50">
+        <div className="container mx-auto px-4 mb-8 text-center">
+          <h3 className="text-xl font-orbitron opacity-70">Trusted by Industry Leaders</h3>
+        </div>
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto glass-card p-8 rounded-lg shadow-neon-strong border-primary/30 animate-fade-in-up">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                {/* Full Name */}
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-rajdhani text-lg">Full Name *</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Vishwas Gupta"
-                          {...field}
-                          className="neon-border bg-background/50 font-rajdhani"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Email & Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="font-rajdhani text-lg">Email Address *</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="vishwas@redhost.tech"
-                            {...field}
-                            className="neon-border bg-background/50 font-rajdhani"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="font-rajdhani text-lg">Phone Number *</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            placeholder="+91 98765 43210"
-                            {...field}
-                            className="neon-border bg-background/50 font-rajdhani"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                {/* Plan & Project Type */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="plan"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="font-rajdhani text-lg">Select Plan *</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="neon-border bg-background/50 font-rajdhani">
-                              <SelectValue placeholder="Choose a plan" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="glass-card">
-                            <SelectItem value="standard">Standard - ₹5,999</SelectItem>
-                            <SelectItem value="gold">Gold - ₹7,999</SelectItem>
-                            <SelectItem value="platinum">Platinum - ₹14,999</SelectItem>
-                            <SelectItem value="mvp">MVP Builder - ₹4,999*</SelectItem>
-                            <SelectItem value="portfolio">Portfolio - ₹1,499*</SelectItem>
-                            <SelectItem value="custom">Custom Plan</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="projectType"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="font-rajdhani text-lg">Project Type *</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="neon-border bg-background/50 font-rajdhani">
-                              <SelectValue placeholder="Select project type" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="glass-card">
-                            <SelectItem value="business">Business Website</SelectItem>
-                            <SelectItem value="ecommerce">E-commerce</SelectItem>
-                            <SelectItem value="portfolio">Portfolio</SelectItem>
-                            <SelectItem value="blog">Blog</SelectItem>
-                            <SelectItem value="landing">Landing Page</SelectItem>
-                            <SelectItem value="mvp">MVP/Startup</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                {/* Message */}
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-rajdhani text-lg">Project Details *</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Tell us about your project, requirements, and any specific features you need..."
-                          className="min-h-[150px] neon-border bg-background/50 font-rajdhani"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  variant="neon"
-                  size="lg"
-                  className="w-full animate-neon-pulse"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Get Your Free Quote"}
-                  {!isSubmitting && <Send className="ml-2 h-5 w-5" />}
-                </Button>
-              </form>
-            </Form>
-
-            <p className="text-sm text-muted-foreground text-center mt-6 font-rajdhani">
-              We'll review your request and get back to you within 24 hours with a detailed quote.
-            </p>
-          </div>
+          <Testimonials />
         </div>
       </section>
 

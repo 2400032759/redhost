@@ -1,264 +1,227 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Lightbulb, Rocket, Target, CheckCircle2, Clock, Zap } from "lucide-react";
+import { ArrowRight, Lightbulb, Rocket, Target, CheckCircle2, Clock, Zap, Cpu, Code2, Globe } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Testimonials } from "@/components/Testimonials";
 
 const MVP = () => {
-  const features = [
-    {
-      icon: Lightbulb,
-      title: "Have an Idea?",
-      description: "Got a brilliant idea but don't know where to start? We'll help you transform it into reality with precision."
-    },
-    {
-      icon: Rocket,
-      title: "Fast Launch",
-      description: "Get your working MVP up and running in just 7 days. No delays, no excuses, pure Japanese efficiency."
-    },
-    {
-      icon: Target,
-      title: "Investor Ready",
-      description: "Create a prototype that's perfect for pitching to investors and stakeholders with stunning design."
+  const scrollToPricing = () => {
+    const element = document.getElementById('mvp-offer');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-  ];
-
-  const included = [
-    "Working MVP in 7 days",
-    "Up to 5 pages",
-    "Core features implementation",
-    "Free web hosting for 1 month",
-    "Japanese tech-inspired design",
-    "Mobile responsive design",
-    "Basic testing included",
-    "1 revision included",
-    "Essential integrations",
-    "Prototype ready for investors",
-    "Clean, modern design"
-  ];
-
-  const process = [
-    {
-      step: "1",
-      title: "Share Your Idea",
-      description: "Tell us about your vision, target audience, and core features you need."
-    },
-    {
-      step: "2",
-      title: "We Plan & Design",
-      description: "Our team creates a blueprint and design mockups for your approval."
-    },
-    {
-      step: "3",
-      title: "Development",
-      description: "We build your MVP with clean code and essential features."
-    },
-    {
-      step: "4",
-      title: "Launch",
-      description: "Your MVP goes live in 7 days, ready to test with real users."
-    }
-  ];
+  };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-background font-sans selection:bg-[#FF2A45]/30">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="absolute inset-0 circuit-pattern opacity-30" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-            <div className="inline-block p-3 glass-card rounded-full mb-4 animate-float">
-              <Lightbulb className="h-12 w-12 text-primary" />
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground leading-tight font-orbitron">
-              💡 Have an Idea? <span className="neon-text">Need an MVP?</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 font-rajdhani">
-              No worries - we'll build your working MVP in just 7 days
+
+      {/* Hero Section - High Impact & FOMO */}
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 bg-grid-white/[0.02]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-primary/10 blur-[120px] rounded-full overflow-visible pointer-events-none" />
+
+        {/* Floating Icons (Simulated Animation) */}
+        <div className="hidden lg:block absolute top-1/4 left-1/4 animate-bounce duration-[3000ms]">
+          <Rocket className="h-12 w-12 text-primary/20 rotate-45" />
+        </div>
+        <div className="hidden lg:block absolute bottom-1/3 right-1/4 animate-pulse duration-[4000ms]">
+          <Code2 className="h-16 w-16 text-primary/10 -rotate-12" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 mb-6 px-6 py-2 rounded-full border border-red-500/50 bg-red-500/10 backdrop-blur-sm animate-pulse">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+            <span className="text-red-400 font-orbitron tracking-widest text-sm font-bold uppercase">High Demand: Only 2 Slots Left This Week</span>
+          </div>
+
+          <h1 className="text-5xl md:text-8xl font-bold font-orbitron mb-6 leading-tight animate-fade-in-up">
+            Don't Let Your Idea <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4D4D] to-[#B30000]">Die on a Napkin.</span>
+          </h1>
+
+          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-muted-foreground font-sans leading-relaxed animate-fade-in-up delay-100 mb-8">
+            The market waits for no one. We assume the tech risk so you can focus on the business.
+            <span className="block mt-4 text-white font-bold text-3xl">
+              Launch your standardized MVP in <span className="text-primary underline decoration-dashed underline-offset-8">7 Days</span>.
+            </span>
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6 animate-fade-in-up delay-200">
+            <Button
+              onClick={scrollToPricing}
+              size="lg"
+              className="h-16 px-10 rounded-full text-xl font-orbitron shadow-[0_0_50px_rgba(220,38,38,0.5)] hover:shadow-[0_0_80px_rgba(220,38,38,0.7)] transition-all duration-300 bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white hover:scale-105 border-none"
+            >
+              Build My MVP Now
+              <Rocket className="ml-2 h-6 w-6 animate-bounce" />
+            </Button>
+            <p className="text-sm font-sans text-muted-foreground">
+              *100% IP Ownership • NDA Protected
             </p>
-            <div className="inline-block glass-card backdrop-blur-sm px-6 py-4 rounded-lg border border-primary/30 neon-border">
-              <p className="text-3xl font-bold text-primary-foreground font-rajdhani">
-                Starting at <span className="neon-text text-4xl">₹4,999/-</span> INR
-              </p>
+          </div>
+        </div>
+      </section>
+
+      {/* The Problem / Agitation Section */}
+      <section className="py-16 bg-muted/20 relative border-y border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center feature-card">
+            <div className="p-8 rounded-2xl bg-background/50 border border-red-500/20">
+              <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-6 text-red-500">
+                <Clock className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold font-orbitron mb-3">Time is Money</h3>
+              <p className="font-sans text-muted-foreground">Every day you delay, a competitor is building your idea. Speed is your only advantage.</p>
             </div>
-            <p className="text-xl text-primary-foreground/80 font-rajdhani">
-              Let's turn your idea into reality! 🚀
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Link to="/quotation">
-                <Button 
-                  variant="neon" 
-                  size="lg" 
-                  className="group animate-neon-pulse"
-                >
-                  Build My MVP
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button 
-                  variant="secondary" 
-                  size="lg"
-                  className="hover:scale-105"
-                >
-                  Discuss My Idea
-                </Button>
-              </Link>
+            <div className="p-8 rounded-2xl bg-background/50 border border-primary/20 shadow-[0_0_30px_rgba(var(--primary-rgb),0.1)] transform scale-105 z-10">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 text-primary">
+                <Rocket className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold font-orbitron mb-3 text-primary">The RedHost Way</h3>
+              <p className="font-sans text-foreground text-lg">We ship fast. 7 Days. Clean Code. Scalable Architecture. No excuses.</p>
+            </div>
+            <div className="p-8 rounded-2xl bg-background/50 border border-red-500/20">
+              <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-6 text-red-500">
+                <Target className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold font-orbitron mb-3">Execution is Key</h3>
+              <p className="font-sans text-muted-foreground">Investors don't fund ideas. They fund execution. Show them a working product.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-muted/30 relative">
-        <div className="absolute inset-0 circuit-pattern opacity-10" />
+      {/* The Offer - High Value */}
+      <section id="mvp-offer" className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-orbitron">
-              Why Choose our <span className="neon-text">MVP Builder ?</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-rajdhani">
-              Perfect for entrepreneurs, startups and innovators who want to validate their ideas quickly
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <div 
-                  key={index}
-                  className="glass-card p-6 rounded-lg hover:shadow-neon transition-all duration-300 hover:scale-105 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="p-3 bg-gradient-primary rounded-lg w-fit mb-4 shadow-glow">
-                    <Icon className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 font-orbitron">{feature.title}</h3>
-                  <p className="text-muted-foreground font-rajdhani">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* What's Included Section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 circuit-pattern opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12 animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 font-orbitron">
-                What's <span className="neon-text">Included</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-5xl font-bold font-orbitron leading-tight">
+                An Unbeatable <br /> <span className="text-primary">Stater Pack</span>
               </h2>
-              <p className="text-muted-foreground text-lg font-rajdhani">
-                Everything you need to launch your MVP successfully
-              </p>
+              <div className="space-y-4">
+                {[
+                  "Complete Production-Ready MVP",
+                  "Modern Tech Stack (React/Next.js)",
+                  "Mobile Responsive Design",
+                  "1 Month Free Hosting",
+                  "Payment Gateway Setup",
+                  "Admin Dashboard Component",
+                  "Investor Pitch Deck Template",
+                  "Full NDA Protection (Legal Signed)"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-card/40 border border-border/50 hover:border-primary/50 transition-colors">
+                    <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0" />
+                    <span className="text-lg font-sans">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <Card className="glass-card shadow-neon border-primary/30">
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl font-orbitron neon-text">MVP Builder Package</CardTitle>
-                <CardDescription className="text-lg">
-                  <span className="text-4xl font-bold text-primary neon-text">₹4,999/-</span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {included.map((item, index) => (
-                    <div 
-                      key={index}
-                      className="flex items-start gap-3 animate-fade-in-up"
-                      style={{ animationDelay: `${index * 0.05}s` }}
-                    >
-                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-card-foreground font-rajdhani">{item}</span>
-                    </div>
-                  ))}
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full" />
+              <Card className="glass-card border-primary/50 relative transform hover:scale-[1.02] transition-transform duration-500 bg-black/40">
+                <div className="absolute top-0 right-0 p-4">
+                  <span className="bg-primary text-black font-bold font-orbitron px-4 py-1 rounded-bl-xl">BEST SELLER</span>
                 </div>
-                <div className="mt-8 pt-6 border-t border-primary/20 text-center">
-                  <Link to="/quotation">
-                    <Button variant="hero" size="lg" className="group">
-                      Get Started Now
-                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <CardHeader className="text-center pb-2 pt-10">
+                  <CardTitle className="text-3xl font-orbitron text-white">MVP Launchpad</CardTitle>
+                  <CardDescription className="font-sans text-lg">One-time investment</CardDescription>
+                </CardHeader>
+                <CardContent className="text-center p-8 pt-4">
+                  <div className="mb-6">
+                    <span className="text-2xl text-muted-foreground line-through mr-4">₹15,000</span>
+                    <span className="text-6xl font-bold text-primary font-orbitron">₹4,999</span>
+                  </div>
+                  <Link to="/mvp-intake">
+                    <Button size="lg" className="w-full text-xl h-14 font-orbitron bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white shadow-neon border-none">
+                      Secure My Spot
+                      <ArrowRight className="ml-2" />
                     </Button>
                   </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 bg-muted/30 relative">
-        <div className="absolute inset-0 circuit-pattern opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-orbitron">
-              Our <span className="neon-text">7-Day Process</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-rajdhani">
-              From idea to launch in just one week with Japanese precision
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {process.map((item, index) => (
-              <div 
-                key={index}
-                className="glass-card p-6 rounded-lg hover:shadow-neon transition-all duration-300 animate-fade-in-up relative"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="absolute -top-4 left-6 bg-gradient-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-neon-strong animate-neon-pulse font-orbitron">
-                  {item.step}
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold mb-2 font-orbitron">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm font-rajdhani">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 glass-card px-6 py-3 rounded-full neon-border">
-              <Clock className="h-5 w-5 text-primary" />
-              <span className="font-semibold font-rajdhani">Total Time: 7 Days</span>
-              <Zap className="h-5 w-5 text-primary animate-pulse" />
+                  <p className="mt-4 text-xs text-muted-foreground font-sans">
+                    *Limited time pricing for early adopters. Price increases next month.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="absolute inset-0 circuit-pattern opacity-30" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in">
-            <h2 className="text-4xl md:text-6xl font-bold text-primary-foreground neon-text font-orbitron">
-              Ready to Turn Your Idea Into Reality?
+      {/* Process - The "Sprint" */}
+      <section className="py-20 bg-background relative border-t border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold font-orbitron mb-4">
+              The 7-Day <span className="text-primary">Sprint</span>
             </h2>
-            <p className="text-xl text-primary-foreground/90 font-rajdhani">
-              Don't let your brilliant idea stay just an idea. Let's build your MVP today!
-            </p> <br/>
-            <Link to="/quotation">
-              <Button 
-                variant="neon" 
-                size="lg" 
-                className="group animate-neon-pulse"
-              >
-                Start Building My MVP
-                <Rocket className="ml-2 h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
-              </Button>
-            </Link>
+            <p className="text-xl text-muted-foreground font-sans">We mean it when we say fast.</p>
           </div>
+
+          <div className="relative max-w-5xl mx-auto">
+            {/* Connector Line */}
+            <div className="hidden md:block absolute top-[2.5rem] left-0 right-0 h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 z-0"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+              {[
+                { icon: Lightbulb, title: "Day 1-2", desc: "Discovery & Blueprint" },
+                { icon: Code2, title: "Day 3-5", desc: "Core Development" },
+                { icon: Testimonials, iconComponent: Cpu, title: "Day 6", desc: "Testing & Polish" }, // Using generic icon logic
+                { icon: Rocket, title: "Day 7", desc: "Deployment & Launch" }
+              ].map((step, idx) => (
+                <div key={idx} className="flex flex-col items-center text-center group">
+                  {/* Node */}
+                  <div className="w-20 h-20 rounded-full bg-background border-2 border-primary flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover:scale-110 transition-transform duration-300">
+                    {step.iconComponent ? <step.iconComponent className="h-8 w-8 text-primary" /> : <step.icon className="h-8 w-8 text-primary" />}
+                  </div>
+                  <h3 className="text-xl font-bold font-orbitron mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground font-sans">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOMO CTA */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/10 animate-pulse" />
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold font-orbitron mb-8">
+            Stop Dreaming. <span className="text-primary">Start Selling.</span>
+          </h2>
+          <p className="text-2xl text-muted-foreground font-sans mb-10 max-w-2xl mx-auto">
+            Your customers are waiting. The competition is moving. <br />
+            Are you ready to take the leap?
+          </p>
+          <div className="inline-block relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#D92626] to-[#B30000] rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+            <Button
+              onClick={scrollToPricing}
+              className="relative px-12 py-8 text-2xl bg-black rounded-lg leading-none flex items-center gap-4 text-white font-orbitron border-none hover:bg-black/80"
+            >
+              <Rocket className="h-8 w-8 text-primary animate-bounce" />
+              Launch My MVP
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-12 bg-background relative border-t border-border/50">
+        <div className="container mx-auto px-4 mb-8 text-center">
+          <h2 className="text-2xl font-orbitron mb-2">Join the <span className="text-primary">Winner's Circle</span></h2>
+        </div>
+        <div className="container mx-auto px-4">
+          <Testimonials />
         </div>
       </section>
 

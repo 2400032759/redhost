@@ -1,211 +1,180 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2, Palette, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, User, Briefcase, Award, Star, TrendingUp, Monitor } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { HiredTestimonials } from "@/components/HiredTestimonials";
 
 const Portfolio = () => {
-  const features = [
-    {
-      icon: Palette,
-      title: "Futuristic Japanese Design",
-      description: "Crafted with a sleek, modern aesthetic inspired by Japan’s design philosophy - minimalist, powerful and elegant."
-    },
-    {
-      icon: Code2,
-      title: "Industry-Grade Code",
-      description: "Your portfolio deserves code that’s clean, optimized and built using best development practices - because first impressions now come in milliseconds."
-    },
-    {
-      icon: Sparkles,
-      title: "Make an Impression That Lasts",
-      description: "Whether it’s a recruiter, client or investor - stand out as a brand, not just another resume."
+  const scrollToPricing = () => {
+    const element = document.getElementById('portfolio-offer');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-  ];
-
-  const included = [
-    "Custom Japanese tech design",
-    "Responsive on all devices",
-    "Project showcase section",
-    "About me section",
-    "Skills & expertise display",
-    "Contact form integration",
-    "Social media links",
-    "Free hosting for 1 month",
-    "SEO optimized",
-    "Fast loading speed",
-    "Easy to update content",
-    "Professional domain setup"
-  ];
+  };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-background font-sans selection:bg-[#FF2A45]/30">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 circuit-pattern opacity-30" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-            <div className="inline-block p-4 glass-card rounded-full mb-4 animate-float">
-              <Sparkles className="h-12 w-12 text-primary" />
+
+      {/* Hero Section - Personal Branding */}
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.02]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-primary/10 blur-[120px] rounded-full overflow-visible pointer-events-none" />
+
+        {/* Floating Icons */}
+        <div className="hidden lg:block absolute top-1/3 left-1/5 animate-bounce duration-[4000ms]">
+          <Briefcase className="h-10 w-10 text-primary/20 -rotate-12" />
+        </div>
+        <div className="hidden lg:block absolute bottom-1/4 right-1/5 animate-pulse duration-[3000ms]">
+          <Award className="h-12 w-12 text-primary/10 rotate-12" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 mb-6 px-6 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm animate-fade-in">
+            <Star className="h-4 w-4 text-primary fill-primary" />
+            <span className="text-primary font-orbitron tracking-widest text-sm font-bold uppercase">Rank #1 in Applications</span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-bold font-orbitron mb-6 leading-tight animate-fade-in-up">
+            Stop Sending Just <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4D4D] to-[#B30000]">A Resume.</span>
+          </h1>
+
+          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-muted-foreground font-sans leading-relaxed animate-fade-in-up delay-100 mb-8">
+            Recruiters spend <span className="text-white font-bold">6 seconds</span> on average.
+            Capture their attention instantly with a world-class digital portfolio.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6 animate-fade-in-up delay-200">
+            <Button
+              onClick={scrollToPricing}
+              size="lg"
+              className="h-16 px-10 rounded-full text-xl font-orbitron shadow-[0_0_40px_rgba(220,38,38,0.5)] hover:shadow-[0_0_60px_rgba(220,38,38,0.7)] transition-all duration-300 bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white hover:scale-105 border-none"
+            >
+              Build My Personal Brand
+              <User className="ml-2 h-6 w-6" />
+            </Button>
+            <p className="text-sm font-sans text-muted-foreground">
+              *Instant Credibility Boost
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why You Need This */}
+      <section className="py-16 bg-muted/20 relative border-y border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="p-8 rounded-2xl bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 text-primary">
+                <Monitor className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold font-orbitron mb-3">Showcase Real Work</h3>
+              <p className="font-sans text-muted-foreground">Don't just list skills. Show live projects that prove your expertise.</p>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground leading-tight neon-text">
-              Need a Professional Portfolio to Get Hired?
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 font-rajdhani">
-              Get your stunning portfolio starting at just{" "}
-              <span className="text-3xl font-bold neon-text">₹1,499/-</span> INR
-            </p>
-            <p className="text-lg text-primary-foreground/80">
-              Built with Japanese-inspired tech design that makes you stand out 🎨
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Link to="/quotation">
-                <Button 
-                  variant="neon" 
-                  size="lg" 
-                  className="group animate-neon-pulse"
-                >
-                  Get My Portfolio
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button 
-                  variant="secondary" 
-                  size="lg"
-                  className="hover:scale-105"
-                >
-                  See Examples
-                </Button>
-              </Link>
+            <div className="p-8 rounded-2xl bg-background/50 border border-primary/20 shadow-[0_0_30px_rgba(220,38,38,0.1)] transform scale-105 z-10">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 text-primary">
+                <TrendingUp className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold font-orbitron mb-3 text-primary">Career Acceleration</h3>
+              <p className="font-sans text-foreground text-lg">Candidates with portfolios get 4x more interview calls and higher salary offers.</p>
+            </div>
+            <div className="p-8 rounded-2xl bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 text-primary">
+                <Briefcase className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold font-orbitron mb-3">Freelance Magnet</h3>
+              <p className="font-sans text-muted-foreground">Attract high-paying freelance clients who trust what they can see.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Portfolio Section */}
-      <section className="py-20 bg-muted/30 relative">
-        <div className="absolute inset-0 circuit-pattern opacity-10" />
+      {/* The Offer */}
+      <section id="portfolio-offer" className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why You Need a <span className="neon-text">Professional Portfolio</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-rajdhani">
-              Stand out in the competitive job market with a portfolio that showcases your skills and projects
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <div 
-                  key={index}
-                  className="glass-card p-6 rounded-lg hover:shadow-neon transition-all duration-300 hover:scale-105 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="p-3 bg-gradient-primary rounded-lg w-fit mb-4">
-                    <Icon className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 font-orbitron">{feature.title}</h3>
-                  <p className="text-muted-foreground font-rajdhani">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Package Section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 circuit-pattern opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12 animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                What's <span className="neon-text">Included</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-5xl font-bold font-orbitron leading-tight">
+                The Ultimate <br /> <span className="text-primary">Career Upgrade</span>
               </h2>
-              <p className="text-muted-foreground text-lg font-rajdhani">
-                Everything you need for a professional online presence
-              </p>
+              <div className="space-y-4">
+                {[
+                  "Stunning Japanese Tech Design",
+                  "About Me & Skills Section",
+                  "Interactive Project Showcase",
+                  "Resume/CV Download Button",
+                  "Contact & Social Integration",
+                  "Mobile Responsive",
+                  "SEO Optimized for Your Name"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-card/40 border border-border/50 hover:border-primary/50 transition-colors">
+                    <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0" />
+                    <span className="text-lg font-sans">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <Card className="glass-card shadow-neon border-primary/30">
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl font-orbitron neon-text">Professional Portfolio Package</CardTitle>
-                <CardDescription className="text-lg">
-                  <span className="text-4xl font-bold text-primary neon-text">₹1,499/-</span>
-                  <span className="block text-sm text-muted-foreground mt-2 font-rajdhani">
-                    One-time payment • Lifetime ownership
-                  </span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                  {included.map((item, index) => (
-                    <div 
-                      key={index}
-                      className="flex items-start gap-3 animate-fade-in-up"
-                      style={{ animationDelay: `${index * 0.05}s` }}
-                    >
-                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-card-foreground font-rajdhani">{item}</span>
-                    </div>
-                  ))}
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full" />
+              <Card className="glass-card border-primary/50 relative transform hover:scale-[1.02] transition-transform duration-500 bg-black/40">
+                <div className="absolute top-0 right-0 p-4">
+                  <span className="bg-primary/20 text-primary border border-primary/50 font-bold font-orbitron px-4 py-1 rounded-full text-xs">STUDENT / PRO</span>
                 </div>
-                
-                <div className="bg-gradient-primary/10 p-4 rounded-lg mb-6 neon-border">
-                  <p className="text-sm text-center font-rajdhani">
-                    <strong className="text-primary">Special Offer:</strong> Get your portfolio delivered in just 3-5 days!
-                  </p>
-                </div>
-
-                <div className="text-center">
+                <CardHeader className="text-center pb-2 pt-10">
+                  <CardTitle className="text-3xl font-orbitron text-white">Portfolio Pro</CardTitle>
+                  <CardDescription className="font-sans text-lg">One-time investment</CardDescription>
+                </CardHeader>
+                <CardContent className="text-center p-8 pt-4">
+                  <div className="mb-6">
+                    <span className="text-2xl text-muted-foreground line-through mr-4">₹5,000</span>
+                    <span className="text-6xl font-bold text-primary font-orbitron">₹1,499</span>
+                  </div>
                   <Link to="/quotation">
-                    <Button 
-                      variant="hero" 
-                      size="lg" 
-                      className="group w-full md:w-auto"
-                    >
-                      Start Building My Portfolio
-                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <Button size="lg" className="w-full text-xl h-14 font-orbitron bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white shadow-neon border-none">
+                      Get Hired Faster
+                      <ArrowRight className="ml-2" />
                     </Button>
                   </Link>
-                </div>
-              </CardContent>
-            </Card>
+                  <p className="mt-4 text-xs text-muted-foreground font-sans">
+                    *Delivered in 3-5 Business Days
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 circuit-pattern opacity-30" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in">
-            <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground neon-text">
-              Ready to Impress Recruiters?
-            </h2>
-            <p className="text-xl text-primary-foreground/90 font-rajdhani">
-              Get your professional portfolio today and land your dream job!
-            </p>
-            <Link to="/quotation">
-              <Button 
-                variant="neon" 
-                size="lg" 
-                className="group animate-neon-pulse"
-              >
-                Get Started Now
-                <Sparkles className="ml-2 h-5 w-5 group-hover:rotate-180 transition-transform" />
-              </Button>
-            </Link>
+      {/* Testimonials - Using Specific HiredTestimonials */}
+      <section className="py-12 bg-background relative border-t border-border/50">
+        <div className="container mx-auto px-4 mb-8 text-center">
+          <h2 className="text-2xl font-orbitron mb-2">People Who Got <span className="text-primary">Hired</span></h2>
+        </div>
+        <div className="container mx-auto px-4">
+          <HiredTestimonials />
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/10 animate-pulse" />
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold font-orbitron mb-8">
+            Your Future Is <span className="text-primary">Waiting.</span>
+          </h2>
+          <div className="inline-block relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#D92626] to-[#B30000] rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+            <Button
+              onClick={scrollToPricing}
+              className="relative px-12 py-8 text-2xl bg-black rounded-lg leading-none flex items-center gap-4 text-white font-orbitron border-none hover:bg-black/80"
+            >
+              <Sparkles className="h-8 w-8 text-primary animate-pulse" />
+              Launch My Portfolio
+            </Button>
           </div>
         </div>
       </section>

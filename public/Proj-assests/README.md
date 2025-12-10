@@ -12,5 +12,7 @@ After that, rebuild (`npm run build`) or restart your dev server (`npm run dev`)
 
 Notes:
 - Accepted formats: .png, .jpg, .webp (we recommend PNG or WEBP)
-- Files placed in `public/projects/` are served as static assets at `https://your-site.com/projects/{filename}`
+Note: screenshots have been moved to `public/Proj-assests/`.
+
+- Files placed in `public/Proj-assests/` are served as static assets at `https://your-site.com/Proj-assests/{filename}`
 - If a screenshot is missing, the page will fall back to a bundled SVG thumbnail and then a live screenshot service.

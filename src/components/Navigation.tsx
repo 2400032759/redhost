@@ -12,9 +12,9 @@ type NavigationProps = {
 
 const Navigation = ({ scrollToTopOnGetStarted }: NavigationProps) => {
   const location = useLocation();
-  
+
   const isActive = (path: string) => location.pathname === path;
-  
+
   const audio = (() => {
     try {
       return useAudio();
@@ -37,115 +37,81 @@ const Navigation = ({ scrollToTopOnGetStarted }: NavigationProps) => {
   }, [mobileOpen]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-lg border-b border-primary/20 neon-border">
-      <div className="container mx-auto px-4 py-4">
+    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/40 supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
+          {/* Logo Section */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="flex items-center gap-2 p-1 rounded-md neon-border animate-neon-pulse">
-              <img
-                src={logo}
-                alt="Letterhead logo"
-                className="h-10 w-auto rounded-sm object-contain"
-              />
-              <img
-                src={syntaxBg}
-                alt="Syntax background"
-                className="h-8 w-auto rounded-sm object-contain"
-              />
+            <div className="flex items-center gap-3 p-2 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm">
+              <img src={logo} alt="Redhost Logo" className="h-12 w-auto object-contain" />
+              <img src={syntaxBg} alt="Logo Graphic" className="h-10 w-auto object-contain opacity-80" />
             </div>
           </Link>
-          
-          <div className="hidden md:flex items-center gap-6">
-            <Link 
-              to="/" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              Home
-            </Link>
-            {/* Our Projects immediately after Home */}
-            <Link 
-              to="/projects" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/projects") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              Our Projects
-            </Link>
 
-            <Link 
-              to="/services" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/services") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              Services
-            </Link>
-            <Link 
-              to="/mvp" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/mvp") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              MVP Builder
-            </Link>
-            <Link 
-              to="/portfolio" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/portfolio") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              Portfolio Builder
-            </Link>
-            
-            <Link 
-              to="/quotation" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/quotation") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              Get Quotation
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`font-medium transition-all hover:text-primary font-rajdhani text-lg hover:neon-text ${
-                isActive("/contact") ? "text-primary neon-text" : "text-foreground"
-              }`}
-            >
-              Contact
-            </Link>
-            <Link to="/quotation" onClick={() => { if (scrollToTopOnGetStarted) window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              <Button variant="neon" size="lg">
-                Get Started
-              </Button>
-            </Link>
-            {/* Desktop toggle placed immediately after Get Started */}
-            {audio && (
-              <div className="hidden md:inline-flex">
-                <Button
-                  variant="neon"
-                  size="sm"
-                  className="animate-neon-pulse shadow-neon-strong ml-2"
-                  onClick={audio.toggle}
-                  aria-pressed={!audio.muted}
-                  aria-label={audio.muted ? "Unmute background music" : "Mute background music"}
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
+            <div className="flex items-center gap-6">
+              {[
+                { path: "/", label: "Home" },
+                { path: "/projects", label: "Our Projects" },
+                { path: "/services", label: "Services" },
+                { path: "/mvp", label: "MVP Builder" },
+                { path: "/portfolio", label: "Portfolio Builder" },
+                { path: "/quotation", label: "Strategy Call" },
+                { path: "/contact", label: "Contact" },
+              ].map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative text-sm font-semibold font-rajdhani tracking-wider uppercase transition-all duration-300 hover:text-primary ${isActive(link.path)
+                    ? "text-primary scale-105 shadow-[0_0_10px_rgba(220,38,38,0.4)] bg-clip-text"
+                    : "text-muted-foreground"
+                    }`}
                 >
-                  {audio.muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                  {link.label}
+                  {isActive(link.path) && (
+                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary shadow-[0_0_8px_var(--primary)] animate-pulse" />
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            <div className="h-6 w-[1px] bg-border/50 mx-2" />
+
+            <div className="flex items-center gap-4">
+              {/* Get Started Button */}
+              <Link to="/quotation" onClick={() => { if (scrollToTopOnGetStarted) window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                <Button
+                  className="bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white border-none shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] rounded-md px-6 py-5 font-orbitron tracking-widest uppercase transition-all duration-300 active:scale-95"
+                >
+                  Get Started
                 </Button>
-              </div>
-            )}
+              </Link>
+
+              {/* Audio Toggle */}
+              {audio && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`ml-2 relative group overflow-hidden border border-transparent hover:border-primary/30 ${!audio.muted && "text-primary"}`}
+                  onClick={audio.toggle}
+                  aria-label={audio.muted ? "Unmute" : "Mute"}
+                >
+                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {audio.muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5 animate-pulse" />}
+                </Button>
+              )}
+            </div>
           </div>
-          {/* (desktop audio toggle kept next to Get Started; mobile toggle is in the overlay) */}
 
           {/* Mobile menu button */}
-          <div className="md:hidden ml-2">
+          <div className="lg:hidden ml-4">
             <button
               onClick={() => setMobileOpen(true)}
-              className="p-2 rounded-md neon-border animate-neon-pulse"
-              aria-label="Open menu"
+              className="p-2 text-foreground hover:text-primary transition-colors relative group"
             >
-              <Menu className="h-6 w-6" />
+              <div className="absolute inset-0 bg-primary/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Menu className="h-7 w-7" />
             </button>
           </div>
         </div>
@@ -154,57 +120,67 @@ const Navigation = ({ scrollToTopOnGetStarted }: NavigationProps) => {
       {/* Mobile menu overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-[999] p-0 md:hidden flex flex-col"
-          style={{
-            background: 'linear-gradient(135deg, #0a0618 0%, #1a0a2d 100%)',
-            minHeight: '100vh',
-            minWidth: '100vw',
-          }}
+          className="fixed inset-0 z-[100] p-0 lg:hidden flex flex-col bg-background/95 backdrop-blur-xl animate-fade-in"
+          style={{ minHeight: '100vh' }}
         >
-          <div className="w-full h-full flex flex-col">
-            <div className="flex items-center justify-between px-6 pt-6 pb-4 bg-background z-20">
-              <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
-                <div className="flex items-center gap-2 p-1 rounded-md neon-border animate-neon-pulse glass-card">
-                  <img src={logo} alt="Letterhead logo" className="h-10 w-auto rounded-sm object-contain" />
-                  <img src={syntaxBg} alt="Syntax background" className="h-8 w-auto rounded-sm object-contain" />
-                </div>
-              </Link>
-              <button onClick={() => setMobileOpen(false)} className="p-2 rounded-md neon-border animate-neon-pulse glass-card" aria-label="Close menu">
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-
-            <nav className="flex flex-col gap-4 w-full flex-1 justify-center px-6">
-              <Link to="/" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">Home</Link>
-              <Link to="/projects" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">Our Projects</Link>
-              <Link to="/services" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">Services</Link>
-              <Link to="/mvp" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">MVP Builder</Link>
-              <Link to="/portfolio" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">Portfolio Builder</Link>
-              <Link to="/quotation" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">Get Quotation</Link>
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className="text-lg font-medium neon-text bg-background w-full p-4 rounded-md shadow">Contact</Link>
-
-              <div className="pt-6 pb-8">
-                <Link to="/quotation" onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-                  <Button variant="neon" size="lg" className="w-full bg-background shadow">Get Started</Button>
-                </Link>
+          <div className="container mx-auto px-4 py-4 flex items-center justify-between border-b border-border/20">
+            <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
+              <div className="flex items-center gap-3 p-2 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm">
+                <img src={logo} alt="Redhost Logo" className="h-12 w-auto object-contain" />
+                <img src={syntaxBg} alt="Logo Graphic" className="h-10 w-auto object-contain opacity-80" />
               </div>
+            </Link>
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="p-2 rounded-full hover:bg-muted/20 transition-colors border border-transparent hover:border-primary/30"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          <nav className="flex flex-col items-center justify-center flex-1 gap-6 p-8">
+            {[
+              { path: "/", label: "Home" },
+              { path: "/projects", label: "Our Projects" },
+              { path: "/services", label: "Services" },
+              { path: "/mvp", label: "MVP Builder" },
+              { path: "/portfolio", label: "Portfolio Builder" },
+              { path: "/quotation", label: "Strategy Call" },
+              { path: "/contact", label: "Contact" },
+            ].map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileOpen(false)}
+                className={`text-2xl font-orbitron font-medium transition-all duration-200 ${isActive(link.path) ? "text-primary scale-110 drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]" : "text-muted-foreground hover:text-foreground"
+                  }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="mt-8 w-full max-w-xs flex flex-col gap-4">
+              <Link to="/quotation" onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                <Button className="w-full h-12 text-lg font-orbitron bg-gradient-to-r from-[#D92626] to-[#B30000] hover:from-[#FF4D4D] hover:to-[#CC0000] text-white border-none shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+                  Get Started
+                </Button>
+              </Link>
 
               {audio && (
-                <div className="pt-4">
-                  <Button
-                    variant="neon"
-                    size="sm"
-                    className="animate-neon-pulse shadow-neon-strong glass-card"
-                    onClick={() => audio.toggle()}
-                    aria-pressed={!audio.muted}
-                    aria-label={audio.muted ? "Unmute background music" : "Mute background music"}
-                  >
-                    {audio.muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                  </Button>
-                </div>
+                <Button
+                  variant="outline"
+                  className="w-full h-12 border-primary/30 hover:bg-primary/5"
+                  onClick={() => audio.toggle()}
+                >
+                  {audio.muted ? (
+                    <span className="flex items-center gap-2">Unmute Sound <VolumeX className="h-4 w-4" /></span>
+                  ) : (
+                    <span className="flex items-center gap-2 text-primary">Mute Sound <Volume2 className="h-4 w-4" /></span>
+                  )}
+                </Button>
               )}
-            </nav>
-          </div>
+            </div>
+          </nav>
         </div>
       )}
     </nav>

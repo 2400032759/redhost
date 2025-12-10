@@ -14,6 +14,10 @@ import NotFound from "./pages/NotFound";
 import { Navigate } from "react-router-dom";
 import BackgroundAudio from "@/components/BackgroundAudio";
 
+import MVPIntake from "./pages/MVPIntake";
+import MVPPayment from "./pages/MVPPayment";
+import SuccessPage from "./pages/SuccessPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -23,19 +27,22 @@ const App = () => (
       <Sonner />
       <BackgroundAudio>
         <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/mvp" element={<MVP />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/projects" element={<OurProjects />} />
-          {/* legacy route: redirect to /projects */}
-          <Route path="/our-projects" element={<Navigate to="/projects" replace />} />
-          <Route path="/quotation" element={<Quotation />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/mvp" element={<MVP />} />
+            <Route path="/mvp-intake" element={<MVPIntake />} />
+            <Route path="/mvp-payment" element={<MVPPayment />} />
+            <Route path="/payment-success" element={<SuccessPage />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/projects" element={<OurProjects />} />
+            {/* legacy route: redirect to /projects */}
+            <Route path="/our-projects" element={<Navigate to="/projects" replace />} />
+            <Route path="/quotation" element={<Quotation />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
       </BackgroundAudio>
     </TooltipProvider>
